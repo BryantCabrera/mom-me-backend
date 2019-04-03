@@ -9,5 +9,18 @@ const Caretaker = require('../models/caretaker');
 
 /********** ROUTES **********/
 //Index Route
+router.get('/', async (req, res) => {
+    try {
+        const allCaretakers = await Caretaker.find({});
+
+        res.json({
+            status: 200,
+            data: allCaretakers
+        })
+    } catch (err) {
+        console.log(err);
+        res.send(err);
+    }
+});
 
 module.exports = router;
