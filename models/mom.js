@@ -14,7 +14,8 @@ const momSchema = new mongoose.Schema({
     img: { type: String, default: 'https://i.imgur.com/KbicDVh.jpg' },
     children: [childSchema],
     sex: String,
-    location: Number
+    location: Number,
+    caretakers: [{type: mongoose.Schema.Types.ObjectId, ref: 'Caretaker'}]
 });
 
 const Mom = mongoose.model('Mom', momSchema);
