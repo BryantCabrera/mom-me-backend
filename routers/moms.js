@@ -23,4 +23,24 @@ router.get('/', async (req, res) => {
     }
 });
 
+//Create Route
+router.post('/', async (req, res) => {
+    console.log(req.body, 'hitting create Mom');
+
+    let hashedPassword = await bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    req.body.password = hashedPassword;
+    try {
+        const createdMom = await Mom.create(req.body);
+        res.json({
+            status: 200,
+            data: 'Registration successful.',
+            createdMom: createdMom
+        });
+        
+    } catch (err) {
+        console.log(err);
+        res.send(err);
+    }
+});
+
 module.exports = router;
