@@ -9,5 +9,18 @@ const Mom = require('../models/mom');
 
 /********** ROUTES **********/
 //Index Route
+router.get('/', async (req, res) => {
+    try {
+        const allMoms = await Mom.find({});
+
+        res.json({
+            status: 200,
+            data: allMoms
+        })
+    } catch (err) {
+        console.log(err);
+        res.send(err);
+    }
+});
 
 module.exports = router;
