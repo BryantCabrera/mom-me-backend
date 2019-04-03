@@ -43,4 +43,18 @@ router.post('/', async (req, res) => {
     }
 });
 
+// Show Route
+router.get('/:id', async (req, res) => {
+    try {
+        const foundMom = await Mom.findById(req.params.id);
+        res.json({
+            status: 200,
+            data: foundMom
+        });
+    } catch (err) {
+        console.log(err);
+        res.send(err);
+    }
+});
+
 module.exports = router;
