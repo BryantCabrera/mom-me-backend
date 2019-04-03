@@ -9,5 +9,57 @@ const Mom = require('../models/mom');
 
 /********** ROUTES **********/
 // Log-In
+router.post('/login', async (req, res) => {
+    try {
+        //finds logged in user 
+        //gets email from req.body (username was attached via form and kept in req.body)
+        const loggedUser = await User.findOne({ email: req.body.email });
+        console.log(loggedUser, ' this is loggedUser');
+        //if user exists
+        if (loggedUser) {
+            //checks if the passwords match, if they do, redirect to page, if not, keep on splash page with message
+            //compares password from req.body to user's hashedpassword in database
+            if (bcrypt.compareSync(req.body.password, loggedUser.password) && req.body.email === loggedUser.email) {
+                //once user is found, create a session
+                req.session.user = loggedUser;
+                req.session.message = '';
+                req.session.logged = true;
+
+                const { _id, name, email, img, children, sex, location, caretakers } = loggedUser
+                const responseLoggedUser = {
+                    _id: _id,
+                    name: name,
+                    email: email,
+                    img: img, 
+                    children: children,
+                    sex: sex,
+                    location: location,
+                    caretakers: caretakers
+                }
+                // res.json({ loggedUser, isLoggedIn: true });
+                res.json({
+                    status: 200,
+                    message: 'login successful',
+                    data: responseLoggedUser
+                })
+            } else {
+                // res.json({ isLoggedIn: false });
+                res.json({
+                    message: 'The password you entered is incorrect!'
+                })
+            }
+        } else {
+            res.json({
+                status: 200,
+                message: 'That user doesn\'t exist!'
+            });
+        }
+    } catch (err) {
+        res.json({
+            status: 200,
+            message: 'Couldn\'t connect to database.'
+        });
+    }
+});
 
 module.exports = router;
