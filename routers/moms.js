@@ -71,4 +71,19 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+// Delete Route
+router.delete('/:id', async (req, res) => {
+    try {
+        const deletedMom = await Mom.findByIdAndRemove(req.params.id);
+
+        console.log(deletedMom, ' this is deletedMom');
+        res.json({
+            status: 200,
+            data: 'Mom successfully deleted.'
+        });
+    } catch (err) {
+        res.send(err);
+    }
+});
+
 module.exports = router;
