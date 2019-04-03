@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
         res.json({
             status: 200,
             data: allCaretakers
-        })
+        });
     } catch (err) {
         console.log(err);
         res.send(err);
@@ -33,8 +33,8 @@ router.post('/', async (req, res) => {
         const createdCaretaker = await Caretaker.create(req.body);
         res.json({
             status: 200,
-            data: 'Registration successful.',
-            createdCaretaker: createdCaretaker
+            message: 'Registration successful.',
+            data: createdCaretaker
         });
         
     } catch (err) {
@@ -78,7 +78,7 @@ router.delete('/:id', async (req, res) => {
         console.log(deletedCaretaker, ' this is deletedCaretaker');
         res.json({
             status: 200,
-            data: 'Caretaker successfully deleted.'
+            message: 'Caretaker successfully deleted.'
         });
     } catch (err) {
         res.send(err);

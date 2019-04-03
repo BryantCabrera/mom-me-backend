@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
         res.json({
             status: 200,
             data: allMoms
-        })
+        });
     } catch (err) {
         console.log(err);
         res.send(err);
@@ -33,8 +33,8 @@ router.post('/', async (req, res) => {
         const createdMom = await Mom.create(req.body);
         res.json({
             status: 200,
-            data: 'Registration successful.',
-            createdMom: createdMom
+            message: 'Registration successful.',
+            data: createdMom
         });
         
     } catch (err) {
@@ -79,7 +79,7 @@ router.delete('/:id', async (req, res) => {
         console.log(deletedMom, ' this is deletedMom');
         res.json({
             status: 200,
-            data: 'Mom successfully deleted.'
+            message: 'Mom successfully deleted.'
         });
     } catch (err) {
         res.send(err);
