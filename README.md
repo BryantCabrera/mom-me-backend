@@ -1,10 +1,10 @@
 # mom-me-backend
 
 ## F. Github workflow
-1.	Link to repo: [https://github.com/BryantCabrera/mom-me](https://github.com/BryantCabrera/mom-me).  
+1.	Link to repo: [https://github.com/BryantCabrera/mom-me-backend](https://github.com/BryantCabrera/mom-me-backend).  
 2.	On your personal repo (NOT the General Assembly) enterprise, log in.  then click link above and fork the repo.  Make sure the repo is in your personal GitHub (go to your personal GitHub account and the project repo “mom-me” should be there).  Then, from YOUR PERSONAL FORK, clone it to your local repo.
     1.	$git clone {without curly braces, put the clone link here}
-    2.  $git remote add upstream https://github.com/BryantCabrera/mom-me
+    2.  $git remote add upstream https://github.com/BryantCabrera/mom-me-backend
 3.	In terminal, cd to the project repo, open it, and $git checkout -b {without these curly braces, put your first name here in all lower case letters}
     1.	EXAMPLE:  $git checkout -b bryant
     2.	**any other time you are changing back to your branch, you don’t need to type the “-b” part anymore
