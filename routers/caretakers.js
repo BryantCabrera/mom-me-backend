@@ -43,4 +43,18 @@ router.post('/', async (req, res) => {
     }
 });
 
+// Show Route
+router.get('/:id', async (req, res) => {
+    try {
+        const foundCaretaker = await Caretaker.findById(req.params.id);
+        res.json({
+            status: 200,
+            data: foundCaretaker
+        });
+    } catch (err) {
+        console.log(err);
+        res.send(err);
+    }
+});
+
 module.exports = router;
