@@ -10,6 +10,8 @@ const cors = require('cors');
 
 require('./db/db');
 
+const momsRouter = require('./routers/moms');
+
 /********** MIDDLEWARE **********/
 app.use(session({
     secret: "THIS IS A RANDOM STRING SECRET",
@@ -30,8 +32,7 @@ app.use(methodOverride('_method'));
 app.use(express.static('public'));
 
 /********** ROUTERS/CONTROLLERS **********/
-app.use('/auth', authRouter);
-app.use('/users', usersRouter);
+app.use('/moms', momsRouter);
 
 /********** LISTENER **********/
 app.listen(process.env.PORT, () => {
