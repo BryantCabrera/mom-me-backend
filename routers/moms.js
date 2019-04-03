@@ -57,4 +57,18 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// Update Route
+router.put('/:id', async (req, res) => {
+    try {
+        const updatedMom = await Mom.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.json({
+            status: 200,
+            data: updatedMom
+        });
+    } catch (err) {
+        console.log(err);
+        res.send(err);
+    }
+});
+
 module.exports = router;
