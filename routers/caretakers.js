@@ -71,4 +71,18 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const deletedCaretaker = await Caretaker.findByIdAndRemove(req.params.id);
+
+        console.log(deletedCaretaker, ' this is deletedCaretaker');
+        res.json({
+            status: 200,
+            data: 'Caretaker successfully deleted.'
+        });
+    } catch (err) {
+        res.send(err);
+    }
+});
+
 module.exports = router;
