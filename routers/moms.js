@@ -25,10 +25,10 @@ router.get('/', async (req, res) => {
 
 //Create Route
 router.post('/', async (req, res) => {
-    console.log(req.body, 'hitting create Mom');
-
     let hashedPassword = await bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     req.body.password = hashedPassword;
+
+    console.log(req.body, 'hitting create Mom');
     try {
         const createdMom = await Mom.create(req.body);
         res.json({

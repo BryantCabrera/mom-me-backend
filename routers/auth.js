@@ -13,20 +13,20 @@ router.post('/login', async (req, res) => {
     try {
         //finds logged in user 
         //gets email from req.body (username was attached via form and kept in req.body)
-        const loggedUser = await User.findOne({ email: req.body.email });
-        console.log(loggedUser, ' this is loggedUser');
-        //if user exists
-        if (loggedUser) {
+        const loggedMom = await Mom.findOne({ email: req.body.email });
+        console.log(loggedMom, ' this is loggedMom');
+        //if Mom exists
+        if (loggedMom) {
             //checks if the passwords match, if they do, redirect to page, if not, keep on splash page with message
-            //compares password from req.body to user's hashedpassword in database
-            if (bcrypt.compareSync(req.body.password, loggedUser.password) && req.body.email === loggedUser.email) {
-                //once user is found, create a session
-                req.session.user = loggedUser;
+            //compares password from req.body to Mom's hashedpassword in database
+            if (bcrypt.compareSync(req.body.password, loggedMom.password) && req.body.email === loggedMom.email) {
+                //once Mom is found, create a session
+                req.session.user = loggedMom;
                 req.session.message = '';
                 req.session.logged = true;
 
-                const { _id, name, email, img, children, sex, location, caretakers } = loggedUser
-                const responseLoggedUser = {
+                const { _id, name, email, img, children, sex, location, caretakers } = loggedMom
+                const responseLoggedMom = {
                     _id: _id,
                     name: name,
                     email: email,
@@ -36,11 +36,11 @@ router.post('/login', async (req, res) => {
                     location: location,
                     caretakers: caretakers
                 }
-                // res.json({ loggedUser, isLoggedIn: true });
+                // res.json({ loggedMom, isLoggedIn: true });
                 res.json({
                     status: 200,
                     message: 'login successful',
-                    data: responseLoggedUser
+                    data: responseLoggedMom
                 })
             } else {
                 // res.json({ isLoggedIn: false });
@@ -51,7 +51,7 @@ router.post('/login', async (req, res) => {
         } else {
             res.json({
                 status: 200,
-                message: 'That user doesn\'t exist!'
+                message: 'That Mom doesn\'t exist!'
             });
         }
     } catch (err) {
@@ -64,13 +64,13 @@ router.post('/login', async (req, res) => {
 
 // Log-Out
 router.get('/logout', (req, res) => {
-    console.log('User successfully logged out.');
-    // req.session.destroy((err) => err ? res.json({error: err}) : res.json({data: 'User successfully logged out.'}));
+    console.log('Mom successfully logged out.');
+    // req.session.destroy((err) => err ? res.json({error: err}) : res.json({data: 'Mom successfully logged out.'}));
 
     req.session.destroy((err) => {
         if (err) return console.log('error', err);
         console.log('successful');
-        res.json({ message: 'User successfully logged out.' })
+        res.json({ message: 'Mom successfully logged out.' })
     });
 });
 
