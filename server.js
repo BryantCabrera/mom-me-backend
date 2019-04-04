@@ -12,6 +12,7 @@ require('./db/db');
 
 const momsRouter = require('./routers/moms');
 const caretakersRouter = require('./routers/caretakers');
+const authRouter = require('./routers/auth');
 
 /********** MIDDLEWARE **********/
 app.use(session({
@@ -35,6 +36,7 @@ app.use(express.static('public'));
 /********** ROUTERS/CONTROLLERS **********/
 app.use('/moms', momsRouter);
 app.use('/caretakers', caretakersRouter);
+app.use('/auth', authRouter)
 
 /********** LISTENER **********/
 app.listen(process.env.PORT, () => {
