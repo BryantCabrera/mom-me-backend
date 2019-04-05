@@ -60,11 +60,14 @@ router.get('/:id', async (req, res) => {
 // Update Route
 router.put('/:id', async (req, res) => {
     try {
+        console.log(req.body, 'hitting edit route on back end')
         const updatedMom = await Mom.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        console.log(updatedMom,'updated mom from back end')
         res.json({
             status: 200,
             data: updatedMom
         });
+        
     } catch (err) {
         console.log(err);
         res.send(err);
